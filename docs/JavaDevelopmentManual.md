@@ -696,6 +696,7 @@ public static  void  main(String[] args)  {
 13. <font color=#FFC000>【推荐】</font>集合泛型定义时，在 JDK7 及以上，使用 diamond 语法或全省略。
 
  &ensp;<font color=#977C00>说明</font>：菱形泛型，即 diamond，直接使用<>来指代前边已经指定的类型。
+
  &ensp;<font color=#099B5D>正例</font>：
 
 ```java
@@ -772,9 +773,9 @@ public static  void  main(String[] args)  {
 
  &ensp;<font color=#977C00>说明</font>：Executors 返回的线程池对象的弊端如下：
 
-1） FixedThreadPool 和 SingleThreadPool：允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。
+ &ensp;1） FixedThreadPool 和 SingleThreadPool：允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。
 
-2） CachedThreadPool：允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。
+ &ensp;2） CachedThreadPool：允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。
 
 5. <font color=#C00000>【强制】</font>SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static，必须加锁，或者使用 DateUtils 工具类。
 
@@ -1120,7 +1121,7 @@ public  void findBoyfriend(Man  man)  {
 
  &ensp;<font color=#977C00>说明</font>：不要在方法体内定义：Pattern pattern = Pattern.compile(“规则”);
 
-2. 【强制】velocity 调用 POJO 类的属性时，直接使用属性名取值即可，模板引擎会自动按规范调用 POJO 的 getXxx()，如果是 boolean 基本数据类型变量（boolean 命名不需要加 is 前缀），会自动调用 isXxx()方法。
+2. <font color=#C00000>【强制】</font>velocity 调用 POJO 类的属性时，直接使用属性名取值即可，模板引擎会自动按规范调用 POJO 的 getXxx()，如果是 boolean 基本数据类型变量（boolean 命名不需要加 is 前缀），会自动调用 isXxx()方法。
 
  &ensp;<font color=#977C00>说明</font>：注意如果是 Boolean 包装类对象，优先调用 getXxx()的方法。
 
@@ -1168,7 +1169,7 @@ public  void findBoyfriend(Man  man)  {
 
 ## (一) 异常处理
 
-1. 【强制】Java 类库中定义的可以通过预检查方式规避的 RuntimeException 异常不应该通过 catch 的方式来处理，比如：NullPointerException，IndexOutOfBoundsException 等等。
+1. <font color=#FFC000>【推荐】</font>Java 类库中定义的可以通过预检查方式规避的 RuntimeException 异常不应该通过 catch 的方式来处理，比如：NullPointerException，IndexOutOfBoundsException 等等。
 
  &ensp;<font color=#977C00>说明</font>：无法通过预检查的异常除外，比如，在解析字符串形式的数字时，可能存在数字格式错误，不得不通过 catchNumberFormatException 来实现。
 
@@ -1179,6 +1180,7 @@ public  void findBoyfriend(Man  man)  {
 ```
 
  &ensp;&emsp;&emsp;<font color=#FF4500>反例</font>：
+ 
 ```jav
 	try { obj.method(); } catch (NullPointerException e) {…}
 ```
@@ -1226,7 +1228,7 @@ public  void findBoyfriend(Man  man)  {
 
  &ensp;<font color=#977C00>说明</font>：通过反射机制来调用方法，如果找不到方法，抛出 NoSuchMethodException。什么情况会抛出NoSuchMethodError 呢？二方包在类冲突时，仲裁机制可能导致引入非预期的版本使类的方法签名不匹配，或者在字节码修改框架（比如：ASM）动态创建或修改类时，修改了相应的方法签名。这些情况，即使代码编译期是正确的，但在代码运行期时，会抛出 NoSuchMethodError。
 
-10. <font color=#FFC000>【推荐】</font>方法的返回值可以为 null，不强制返回空集合，或者空对象等，必须添加注释充分 &ensp;<font color=#977C00>说明</font>什么情况下会返回 null 值。
+10. <font color=#FFC000>【推荐】</font>方法的返回值可以为 null，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下会返回 null 值。
 
  &ensp;<font color=#977C00>说明</font>：本手册明确防止 NPE 是调用者的责任。即使被调用方法返回空集合或者空对象，对调用者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回 null 的情况。
 
@@ -1569,6 +1571,7 @@ appName_logType_logName.log。logType:日志类型，如 stats/monitor/access �
  &ensp;<font color=#977C00>说明</font>：MySQL 并不是跳过 offset 行，而是取 offset+N 行，然后返回放弃前 offset 行，返回 N 行，那当offset 特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL改写。
 
 &ensp;&emsp;&emsp;<font color=#099B5D>正例</font>：先快速定位需要获取的 id 段，然后再关联：
+
 ```sql
 SELECT a.* FROM 表 1 a, (select id from 表 1 where 条件 LIMIT 100000,20 ) b where a.id=b.id
 ```
@@ -1577,13 +1580,13 @@ SELECT a.* FROM 表 1 a, (select id from 表 1 where 条件 LIMIT 100000,20 ) b 
 
  &ensp;<font color=#977C00>说明</font>：
 
-&ensp;1） consts 单表中最多只有一个匹配行（主键或者唯一索引），在优化阶段即可读取到数据。
+ &ensp;1） consts 单表中最多只有一个匹配行（主键或者唯一索引），在优化阶段即可读取到数据。
 
-&ensp;2） ref 指的是使用普通的索引（normal index）。
+ &ensp;2） ref 指的是使用普通的索引（normal index）。
 
-&ensp;3） range 对索引进行范围检索。
+ &ensp;3） range 对索引进行范围检索。
 
- &ensp; &ensp; &ensp;<font color=#FF4500>反例</font>：explain 表的结果，type=index，索引物理文件全扫描，速度非常慢，这个 index 级别比较 range还低，与全表扫描是小巫见大巫。
+ &ensp; <font color=#FF4500>反例</font>：explain 表的结果，type=index，索引物理文件全扫描，速度非常慢，这个 index 级别比较 range还低，与全表扫描是小巫见大巫。
 
 9. <font color=#FFC000>【推荐】</font>建组合索引的时候，区分度最高的在最左边。
 
@@ -1645,7 +1648,7 @@ SELECT a.* FROM 表 1 a, (select id from 表 1 where 条件 LIMIT 100000,20 ) b 
 
  &ensp;如果需要存储表情，那么选择 utf8mb4 来进行存储，注意它与 utf-8 编码的区别。
 
-11. 【参考】TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少，但TRUNCATE 无事务且不触发 trigger，有可能造成事故，故不建议在开发代码中使用此语句。
+11. <font color=#76923C>【参考】</font>TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少，但TRUNCATE 无事务且不触发 trigger，有可能造成事故，故不建议在开发代码中使用此语句。
 
  &ensp;<font color=#977C00>说明</font>：TRUNCATE TABLE 在功能上与不带 WHERE 子句的 DELETE 语句相同。
 
