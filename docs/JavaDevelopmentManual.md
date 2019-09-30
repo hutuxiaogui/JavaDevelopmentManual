@@ -6,7 +6,7 @@
 
 1. <font color=#C00000>【强制】</font>代码中的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。
 
- &ensp; <font color=#FF4500>反例</font>：_name /    name / $name / name_ / name$ / name 
+ &ensp; <font color=#FF4500>反例</font>：\_name /    name / \$name / name\_ / name\$ / name 
 
 2. <font color=#C00000>【强制】</font>代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。
 
@@ -1180,7 +1180,7 @@ public  void findBoyfriend(Man  man)  {
 ```
 
  &ensp;&emsp;&emsp;<font color=#FF4500>反例</font>：
- 
+
 ```jav
 	try { obj.method(); } catch (NullPointerException e) {…}
 ```
@@ -1340,9 +1340,9 @@ appName_logType_logName.log。logType:日志类型，如 stats/monitor/access �
  &ensp;<font color=#977C00>说明</font>：单元测试在线上运行时，感觉像空气（AIR）一样并不存在，但在测试质量的保障上，却是非常关键的。好的单元测试宏观上来说，具有自动化、独立性、可重复执行的特点。
 
 	- A：Automatic（自动化）
-
+	
 	- I：Independent（独立性）
-
+	
 	- R：Repeatable（可重复）
 
 2. <font color=#C00000>【强制】</font>单元测试应该是全自动执行的，并且非交互式的。测试用例通常是被定期执行的，执行过程必须完全自动化才有意义。输出结果需要人工检查的测试不是一个好的单元测试。单元测试中不准使用 System.out 来进行人肉验证，必须使用 assert 来验证。
@@ -1436,15 +1436,15 @@ appName_logType_logName.log。logType:日志类型，如 stats/monitor/access �
  &ensp;<font color=#977C00>说明</font>：忽略参数校验可能导致：
 
 	- page size 过大导致内存溢出
-
+	
 	- 恶意 order by 导致数据库慢查询
-
+	
 	- 任意重定向
-
+	
 	- SQL 注入
-
+	
 	- 反序列化注入
-
+	
 	- 正则输入源串拒绝服务 ReDoS
 
  &ensp;<font color=#977C00>说明</font>：Java 代码用正则来验证客户端的输入，有些正则写法验证普通用户输入没有问题，但是如果攻击人员使用的是特殊构造的字符串来验证，有可能导致死循环的结果。
