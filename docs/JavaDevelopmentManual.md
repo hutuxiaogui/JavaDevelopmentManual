@@ -455,7 +455,7 @@ public static  void  main(String[] args)  {
 
  &ensp;1） <font color=#C00000>【强制】</font>所有的 POJO 类属性必须使用包装数据类型。
 
- &ensp;2） 【强制】RPC 方法的返回值和参数必须使用包装数据类型。
+ &ensp;2）  <font color=#C00000>【强制】</font>RPC 方法的返回值和参数必须使用包装数据类型。
 
  &ensp;3） <font color=#FFC000>【推荐】</font>所有的局部变量使用基本数据类型。
 
@@ -474,7 +474,7 @@ public static  void  main(String[] args)  {
 
 14. <font color=#C00000>【强制】</font>构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 init 方法中。
 
-15. 【强制】POJO 类必须写 toString 方法。使用 IDE 中的工具：source“&gt; generate toString时，如果继承了另一个 POJO 类，注意在前面加一下 super.toString。
+15.  <font color=#C00000>【强制】</font>POJO 类必须写 toString 方法。使用 IDE 中的工具：source“&gt; generate toString 时，如果继承了另一个 POJO 类，注意在前面加一下 super.toString。
 
  &ensp;<font color=#977C00>说明</font>：在方法执行抛出异常时，可以直接调用 POJO 的 toString()方法打印其属性值，便于排查问题。
 
